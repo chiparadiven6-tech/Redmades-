@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redmades FC — Chinhoyi</title>
+<meta name="description" content="Official home of Redmades FC, a football club based in Chinhoyi, Zimbabwe. Fixtures, results, squad and club news.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon: #6E1423;
+    --maroon-dark: #4A0D18;
+    --gold: #D9A441;
+    --charcoal: #16110F;
+    --bone: #F3ECE0;
+    --green: #37503B;
+    --line: rgba(243,236,224,0.14);
+    --stripe-w: 14vw;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--charcoal);
+    color:var(--bone);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    line-height:0.95;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  a{color:inherit;}
+
+  :focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(22,17,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:68px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Anton', sans-serif;
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+    text-decoration:none;
+  }
+  .brand svg{width:34px;height:34px;flex-shrink:0;}
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+  }
+  nav a.navlink{
+    text-decoration:none;
+    font-size:0.85rem;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--bone);
+    opacity:0.75;
+    transition:opacity 0.2s;
+  }
+  nav a.navlink:hover{opacity:1;}
+  .menu-btn{display:none;background:none;border:none;color:var(--bone);}
+
+  @media (max-width:720px){
+    nav ul{
+      position:fixed;
+      top:68px;left:0;right:0;
+      flex-direction:column;
+      background:var(--charcoal);
+      border-bottom:1px solid var(--line);
+      padding:16px 24px 24px;
+      gap:18px;
+      transform:translateY(-120%);
+      transition:transform 0.25s ease;
+    }
+    nav ul.open{transform:translateY(0);}
+    .menu-btn{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:100px 0 80px;
+    background:
+      repeating-linear-gradient(
+        115deg,
+        var(--maroon-dark) 0 var(--stripe-w),
+        var(--maroon) var(--stripe-w) calc(var(--stripe-w) * 2)
+      );
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(22,17,15,0) 40%, var(--charcoal) 100%);
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .eyebrow{
+    font-size:0.8rem;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(3.2rem, 10vw, 7.5rem);
+    color:var(--bone);
+    text-shadow:0 6px 0 rgba(0,0,0,0.25);
+  }
+  .hero p.tag{
+    margin-top:20px;
+    max-width:480px;
+    font-size:1.15rem;
+    color:var(--bone);
+    opacity:0.9;
+  }
+  .hero-actions{
+    margin-top:36px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border-radius:2px;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary{background:var(--gold); color:var(--maroon-dark);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1.5px solid var(--bone); color:var(--bone);}
+  .btn-ghost:hover{background:var(--bone); color:var(--maroon-dark);}
+
+  /* ---------- SECTION BASICS ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:44px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;
+  }
+  .section-head h2{
+    font-size:clamp(2rem, 5vw, 3rem);
+  }
+  .section-head .mono{
+    font-size:0.75rem;
+    opacity:0.55;
+    text-transform:uppercase;
+  }
+
+  /* ---------- NEXT MATCH ---------- */
+  .next-match{
+    background:var(--maroon);
+    border-radius:4px;
+    padding:36px 40px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+  }
+  .next-match .label{
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
+  .next-match .fixture{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    text-transform:uppercase;
+  }
+  .next-match .meta{
+    opacity:0.85;
+    margin-top:6px;
+    font-size:0.95rem;
+  }
+  .countdown{
+    display:flex;
+    gap:18px;
+  }
+  .countdown div{text-align:center;}
+  .countdown .num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:1.9rem;
+    font-weight:600;
+    color:var(--gold);
+    line-height:1;
+  }
+  .countdown .unit{
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    opacity:0.7;
+  }
+
+  /* ---------- FIXTURES / RESULTS TABLE ---------- */
+  .table-wrap{overflow-x:auto;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:620px;
+  }
+  th{
+    text-align:left;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    padding:0 12px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  td{
+    padding:16px 12px;
+    border-bottom:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  tr.result td.score{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:600;
+  }
+  .tag-pill{
+    display:inline-block;
+    font-size:0.65rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:20px;
+    font-weight:600;
+  }
+  .pill-w{background:rgba(55,80,59,0.35); color:#8FCB98;}
+  .pill-d{background:rgba(217,164,65,0.2); color:var(--gold);}
+  .pill-l{background:rgba(110,20,35,0.35); color:#E39AA6;}
+  .pill-home{background:rgba(243,236,224,0.1); color:var(--bone);}
+
+  /* ---------- SQUAD ---------- */
+  .squad-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .player{
+    background:var(--charcoal);
+    padding:22px 18px;
+    position:relative;
+  }
+  .player .num{
+    font-family:'Anton', sans-serif;
+    font-size:2.6rem;
+    color:rgba(243,236,224,0.12);
+    position:absolute;
+    top:8px;
+    right:14px;
+  }
+  .player .pos{
+    font-size:0.65rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .player .name{
+    font-weight:600;
+    font-size:1rem;
+  }
+
+  /* ---------- STORY / ABOUT ---------- */
+  .about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .about .stat-row{
+    display:flex;
+    gap:36px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .about .stat .num{
+    font-family:'Anton', sans-serif;
+    font-size:2.4rem;
+    color:var(--gold);
+  }
+  .about .stat .lbl{
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.7;
+  }
+  .about p{opacity:0.85; margin-bottom:16px;}
+
+  @media (max-width:800px){
+    .about{grid-template-columns:1fr;}
+  }
+
+  /* ---------- NEWS ---------- */
+  .news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:28px;
+  }
+  .news-card{
+    border:1px solid var(--line);
+    padding:26px;
+    border-radius:4px;
+    transition:border-color 0.2s;
+  }
+  .news-card:hover{border-color:var(--gold);}
+  .news-card .date{
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .news-card h3{
+    font-family:'Work Sans', sans-serif;
+    font-weight:700;
+    text-transform:none;
+    font-size:1.15rem;
+    margin-bottom:10px;
+  }
+  .news-card p{opacity:0.8; font-size:0.92rem;}
+
+  /* ---------- JOIN / CONTACT ---------- */
+  .join{
+    background:var(--maroon);
+    border-radius:4px;
+    padding:56px 44px;
+    text-align:center;
+  }
+  .join h2{font-size:clamp(1.8rem,4.5vw,2.6rem); margin-bottom:14px;}
+  .join p{max-width:480px; margin:0 auto 30px; opacity:0.9;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0;
+    font-size:0.85rem;
+    opacity:0.65;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 2 L44 10 V24 C44 36 35 44 24 46 C13 44 4 36 4 24 V10 Z" fill="#6E1423" stroke="#D9A441" stroke-width="2"/>
+        <path d="M24 6 L24 46" stroke="#D9A441" stroke-width="1" opacity="0.5"/>
+        <text x="24" y="29" text-anchor="middle" font-family="Anton" font-size="16" fill="#F3ECE0">RFC</text>
+      </svg>
+      Redmades&nbsp;FC
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <ul id="navMenu">
+      <li><a class="navlink" href="#fixtures">Fixtures</a></li>
+      <li><a class="navlink" href="#squad">Squad</a></li>
+      <li><a class="navlink" href="#club">Club</a></li>
+      <li><a class="navlink" href="#news">News</a></li>
+      <li><a class="navlink" href="#join">Join Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">Chinhoyi · Mashonaland West</div>
+    <h1>Redmades<br>FC</h1>
+    <p class="tag">Football club built on Chinhoyi's own ground — home matches, home talent, home pride.</p>
+    <div class="hero-actions">
+      <a href="#fixtures" class="btn btn-primary">See Fixtures</a>
+      <a href="#join" class="btn btn-ghost">Join the Club</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="fixtures">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Next Up</h2>
+        <span class="mono">2026 Season</span>
+      </div>
+
+      <div class="next-match">
+        <div>
+          <div class="label">Next Opponent · Home</div>
+          <div class="fixture">Redmades FC <span style="color:var(--gold)">vs</span> Mhangura FC</div>
+          <div class="meta">Chinhoyi Caves, ZimParks · Date TBC</div>
+        </div>
+      </div>
+
+      <div style="height:56px"></div>
+
+      <div class="section-head">
+        <h2>Upcoming Opponents</h2>
+        <span class="mono">This Season</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Opponent</th><th>Venue</th><th>Date</th></tr>
+          </thead>
+          <tbody>
+            <tr class="result">
+              <td>Mhangura FC</td>
+              <td><span class="tag-pill pill-home">Home</span></td>
+              <td class="mono">TBC</td>
+            </tr>
+            <tr class="result">
+              <td>Stokeday FC</td>
+              <td><span class="tag-pill pill-home">Home</span></td>
+              <td class="mono">TBC</td>
+            </tr>
+            <tr class="result">
+              <td>ZRP FC</td>
+              <td><span class="tag-pill pill-home">Home</span></td>
+              <td class="mono">TBC</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:16px; font-size:0.85rem; opacity:0.6;">Add kickoff dates and times as fixtures are confirmed. Results will appear here once matches are played.</p>
+    </div>
+  </section>
+
+  <section id="squad">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>First Team</h2>
+        <span class="mono">2026 Squad</span>
+      </div>
+      <div class="squad-grid">
+        <div class="player"><span class="num">1</span><div class="pos">Squad</div><div class="name">Mike</div></div>
+        <div class="player"><span class="num">2</span><div class="pos">Squad</div><div class="name">Devine</div></div>
+        <div class="player"><span class="num">3</span><div class="pos">Squad</div><div class="name">Mugwagwa</div></div>
+        <div class="player"><span class="num">4</span><div class="pos">Squad</div><div class="name">Junior</div></div>
+        <div class="player"><span class="num">5</span><div class="pos">Squad</div><div class="name">Nathan</div></div>
+        <div class="player"><span class="num">6</span><div class="pos">Captain</div><div class="name">Mutonhori</div></div>
+        <div class="player"><span class="num">7</span><div class="pos">Squad</div><div class="name">Lodza</div></div>
+        <div class="player"><span class="num">8</span><div class="pos">Squad</div><div class="name">Wish</div></div>
+        <div class="player"><span class="num">9</span><div class="pos">Squad</div><div class="name">Naggie</div></div>
+        <div class="player"><span class="num">10</span><div class="pos">Squad</div><div class="name">Kante</div></div>
+        <div class="player"><span class="num">11</span><div class="pos">Squad</div><div class="name">Marara</div></div>
+      </div>
+
+      <div style="height:44px"></div>
+      <div class="section-head">
+        <h2 style="font-size:1.6rem;">Subs &amp; Reserves</h2>
+      </div>
+      <div class="squad-grid">
+        <div class="player"><div class="pos">Sub</div><div class="name">Takunda</div></div>
+        <div class="player"><div class="pos">Sub</div><div class="name">Prenco</div></div>
+        <div class="player"><div class="pos">Sub</div><div class="name">Kuziva</div></div>
+        <div class="player"><div class="pos">Reserve</div><div class="name">Diven</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="club">
+    <div class="wrap">
+      <div class="about">
+        <div>
+          <div class="eyebrow" style="color:var(--gold)">Our Club</div>
+          <h2 style="font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:20px;">Rooted in Chinhoyi</h2>
+          <p>Redmades FC represents Chinhoyi on the pitch — a club built by the community it plays for, competing week in and week out for local pride.</p>
+          <p>Led on the pitch by captain Mutonhori, the first team is backed by a growing U19 side currently preparing to enter the Social League.</p>
+          <div class="stat-row">
+            <div class="stat"><div class="num">11</div><div class="lbl">First Team</div></div>
+            <div class="stat"><div class="num">4</div><div class="lbl">Subs &amp; Reserves</div></div>
+            <div class="stat"><div class="num">U19</div><div class="lbl">Joining Social League</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow" style="color:var(--gold)">Home Ground</div>
+          <h2 style="font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:20px;">Chinhoyi Caves, ZimParks</h2>
+          <p>Redmades FC plays its home fixtures at the Chinhoyi Caves ZimParks grounds — supporters can head there on matchdays to back the team.</p>
+          <p style="opacity:0.6; font-size:0.9rem;">Add directions or a map link here once you're ready to share more detail with supporters.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Club News</h2>
+        <span class="mono">Latest Updates</span>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="date">Jul 2026</div>
+          <h3>U19 side preparing for Social League entry</h3>
+          <p>Redmades FC's U19 team isn't in a league yet — they're currently preparing to join the Social League, which kicks off this month.</p>
+        </div>
+        <div class="news-card">
+          <div class="date">Jul 2026</div>
+          <h3>Home ground: Chinhoyi Caves, ZimParks</h3>
+          <p>All home fixtures are hosted at the Chinhoyi Caves ZimParks grounds. Come support the team on matchday.</p>
+        </div>
+        <div class="news-card">
+          <div class="date">Jul 2026</div>
+          <h3>Follow us on TikTok</h3>
+          <p>Redmades FC doesn't have a Facebook page — catch matchday content and updates on TikTok instead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="wrap">
+      <div class="join">
+        <h2>Follow Redmades FC</h2>
+        <p>Get matchday updates, fixtures and club news on TikTok.</p>
+        <div class="hero-actions" style="justify-content:center;">
+          <a href="https://www.tiktok.com/@brukx#8" class="btn btn-primary">Follow on TikTok @brukx#8</a>
+          <a href="mailto:info@redmadesfc.example" class="btn btn-ghost">Contact the Club</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; width:100%;">
+    <span>© <span id="year"></span> Redmades FC — Chinhoyi, Zimbabwe</span>
+    <span>Built for free with GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuBtn = document.getElementById('menuBtn');
+  const navMenu = document.getElementById('navMenu');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', false);
+  }));
+
+</script>
+
+</body>
+</html>
